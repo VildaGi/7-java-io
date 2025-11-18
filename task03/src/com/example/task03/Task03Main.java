@@ -1,8 +1,13 @@
 package com.example.task03;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 public class Task03Main {
     public static void main(String[] args) throws IOException {
@@ -15,7 +20,14 @@ public class Task03Main {
     }
 
     public static String readAsString(InputStream inputStream, Charset charset) throws IOException {
-        // your implementation here
-        return "";
+        if (inputStream == null || charset == null) throw new IllegalArgumentException();
+        ByteArrayOutputStream result = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+
+        int lenght;
+        while((lenght = inputStream.read(buffer)) != -1){
+            result.write(buffer, 0, lenght);
+        }
+        return result.toString(charset);
     }
 }
